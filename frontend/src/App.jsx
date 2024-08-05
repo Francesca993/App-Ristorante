@@ -2,6 +2,8 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BarraDiNavigazione from "./Components/Navbar/BarraDiNavigazione";
 import PaginaRecensioni from "./Components/RecensioniECommenti.jsx/PaginaRecensioni";
+import ContentMenu from "./Components/menu/ContentMenu.jsx";
+import PrimaParte from "./Components/Jumbotron/PrimaParte.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -9,10 +11,10 @@ function App() {
     <Router>
       <BarraDiNavigazione />
       <Routes>
+        <Route path="/" element={<PrimaParte />} />
+        <Route path="/menu" element={<ContentMenu />} />
         <Route path="/commentiErecensioni" element={<PaginaRecensioni />} />
       </Routes>
-      <h1>CIAONE</h1>
-      <h2>ciaone</h2>
     </Router>
   );
 }

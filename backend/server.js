@@ -3,6 +3,8 @@ import endpoints from "express-list-endpoints";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js";
+import blogPostRoutes from "./routes/blogPostRoutes.js";
+import ordineRoutes from "./routes/ordineRoutes.js";
 import cors from "cors";
 
 dotenv.config();
@@ -16,6 +18,8 @@ mongoose
 
 const PORT = process.env.PORT || 6001;
 app.use("/api/users", userRoutes);
+app.use("/api/posts", blogPostRoutes);
+app.use("/api/ordine", ordineRoutes);
 app.listen(PORT, () => {
   console.log("server acceso sulla porta");
   console.log("sono disponibili i seguenti endpoints");

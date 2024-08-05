@@ -17,6 +17,9 @@ export default function BarraDiNavigazione() {
           <Nav.Link>
             <Link to="/commentiErecensioni"> Recensioni&Commenti</Link>
           </Nav.Link>
+          <Nav.Link>
+            <Link to="/menu">Menù</Link>
+          </Nav.Link>
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">
