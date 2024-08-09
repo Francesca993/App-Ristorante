@@ -26,7 +26,7 @@ export default function VisualizzaRecensioni() {
         <h1>LE VOSTRE RECENSIONI</h1>
         <Row>
           {posts.map((post) => (
-            <Col key={post.id}>
+            <Col key={post._id}>
               <div className="card">
                 <div className="card-header">
                   AUTORE RECENSIONE: {post.name}

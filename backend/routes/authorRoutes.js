@@ -1,7 +1,5 @@
 import express from "express";
 import Author from "../models/Author.js";
-import BlogPost from "../models/BlogPost.js";
-import cloudinaryUploader from "../config/claudinaryConfig.js"; // Import dell'uploader di Cloudinary (CON CLOUDINARY)
 
 const router = express.Router();
 
@@ -119,7 +117,7 @@ router.get("/:id/blogPosts", async (req, res) => {
 // PATCH /authors/:authorId/avatar: carica un'immagine avatar per l'autore specificato
 router.patch(
   "/:authorId/avatar",
-  cloudinaryUploader.single("avatar"),
+  //cloudinaryUploader.single("avatar"), se dovessi aggiungere l'avatar
   async (req, res) => {
     try {
       // Verifica se è stato caricato un file, se non l'ho caricato rispondo con un 400

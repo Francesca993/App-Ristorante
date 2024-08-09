@@ -2,10 +2,18 @@ import express from "express";
 import endpoints from "express-list-endpoints";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import userRoutes from "./routes/userRoutes.js";
 import blogPostRoutes from "./routes/blogPostRoutes.js";
 import ordineRoutes from "./routes/ordineRoutes.js";
+import authorRoutes from "./routes/authorRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
+// importo i middleware
+import {
+  badRequestHandler,
+  unauthorizedHandler,
+  notFoundHandler,
+  genericErrorHandler,
+} from "./middleware/errorHandlers.js";
 
 dotenv.config();
 const app = express();
@@ -17,7 +25,8 @@ mongoose
   .catch((err) => console.error("MONGO DB: ERRORE ", err));
 
 const PORT = process.env.PORT || 6001;
-app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes); // rotte per autenticaione
+app.use("/api/authors", authorRoutes);
 app.use("/api/posts", blogPostRoutes);
 app.use("/api/ordine", ordineRoutes);
 app.listen(PORT, () => {

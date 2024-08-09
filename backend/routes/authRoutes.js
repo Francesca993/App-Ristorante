@@ -1,7 +1,7 @@
 import express from "express";
 import Author from "../models/Author.js";
 import { generateJWT } from "../utils/jwt.js";
-import { authMiddleware } from "../middlewares/authMiddleware.js";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 

@@ -1,8 +1,10 @@
 import express from "express";
 import ListaOrdine from "../models/ListaOrdine.js";
+// import authMiddleware from "";
 
 const router = express.Router();
-//Ottenere la lista di tutti i post
+//router.use(authMiddleware); per consentire solo a chi è autenticato di fare ordini
+//Ottenere la lista di tutti gli ordini
 router.get("/", async (req, res) => {
   try {
     const OrdineTotale = await ListaOrdine.find({});
@@ -11,10 +13,10 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-//Rotta singolo Post
+//Rotta singolo ordine
 router.get("/:id", async (req, res) => {
   try {
-    const singoloPiatto = await singoloPiatto.findById(req.params.id);
+    const singoloPiatto = await ListaOrdine.findById(req.params.id);
     if (!singoloPiatto) {
       return res.status(404).json({ message: "Recensione non trovata" });
     }
@@ -22,20 +24,20 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-//Rotta per creare un post
+//Rotta per creare un ordine
 router.post("/", async (req, res) => {
   const singoloPiatto = new ListaOrdine(req.body);
   try {
     const newOrdine = await singoloPiatto.save();
     res.status(201).json(newOrdine);
   } catch (err) {
-    res.status(400).json({ message: err.mssage });
+    res.status(400).json({ message: err.message });
   }
 });
-//rotta per aggiornare un utente
+//rotta per aggiornare un ordine
 router.patch("/:id", async (req, res) => {
   try {
-    const updatePiatto = await singoloPiatto.findByIdAndUpdate(
+    const updatePiatto = await ListaOrdine.findByIdAndUpdate(
       req.params.id,
       req.body,
       {
@@ -44,13 +46,13 @@ router.patch("/:id", async (req, res) => {
     );
     res.json(updatePiatto);
   } catch (err) {
-    res.status(400).json({ message: err.mssage });
+    res.status(400).json({ message: err.message });
   }
 });
 //Delete
 router.delete("/:id", async (req, res) => {
   try {
-    await singoloPiatto.findByIdAndDelete(req.params.id);
+    await ListaOrdine.findByIdAndDelete(req.params.id);
     res.json({ message: "Utente eliminato" });
   } catch (err) {
     res.status(500).json({ message: err.message });

@@ -4,51 +4,42 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
+import { createOrdine } from "../../Services/api";
 
-export default function AreaOrdine({ piatto, immagine }) {
-  const [inputValue, setInputValue] = useState(""); // Stato per l'input del form
-  const [quantity, setQuantity] = useState(""); // Stato per la quantità selezionata
-  // Funzione per gestire il cambiamento di selezione
-  const handleSelectChange = (e) => {
-    setQuantity(e.target.value);
+export default function AreaOrdine({ piatto }) {
+  const [ordine, setOrdine] = useState({
+    nome: piatto.nome,
+    foto: piatto.immagine,
+    valore: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setOrdine({ ...ordine, [name]: value });
   };
 
-  const handleAddItem = () => {
-    // Creiamo un nuovo oggetto elemento con il valore dell'input
-    const newItem = {
-      nome: piatto,
-      foto: immagine,
-      valore: inputValue,
-      quantity: quantity,
-    };
-
-    // POST all'API per aggiungere il nuovo elemento
-    fetch("http://localhost:4505/ordine", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // Specifica il tipo di contenuto come JSON
-      },
-      body: JSON.stringify(newItem), // Convertiamo il nuovo oggetto elemento in una stringa JSON
-    })
-      .then((response) => response.json()) // Convertiamo la risposta in formato JSON
-      .then((data) => setItems([...items, data])); // Aggiorniamo la lista degli elementi con il nuovo elemento
-    setInputValue("");
-    setQuantity(""); //Resettiamo gli input
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createOrdine(ordine);
+    } catch (err) {
+      console.error("errore nell'inserimento dell'ordine", err);
+    }
   };
 
   return (
     <Container>
       <Row>
         <Col>
-          <Button type="submit" variant="secondary" onClick={handleAddItem}>
+          <Button type="submit" variant="secondary" onClick={handleSubmit}>
             Aggiungi al carrello
           </Button>
         </Col>
         <Col>
           <Form.Select
-            aria-label="Default select example"
-            value={quantity}
-            onChange={handleSelectChange}
+            type="text" // Corretto: utilizza lo stato corretto
+            onChange={handleChange}
+            name="valore"
           >
             <option>Quantità</option>
             <option value="1">1</option>

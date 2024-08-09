@@ -5,6 +5,9 @@ import PaginaRecensioni from "./Components/RecensioniECommenti.jsx/PaginaRecensi
 import ContentMenu from "./Components/menu/ContentMenu.jsx";
 import PrimaParte from "./Components/Jumbotron/PrimaParte.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Register from "./Components/RegisterLogin/Register.jsx";
+import Login from "./Components/RegisterLogin/Login.jsx";
+import VisualizzaOrdine from "./Components/visualizzaOrdine/VisualizzaOrdine.jsx";
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
         <Route path="/" element={<PrimaParte />} />
         <Route path="/menu" element={<ContentMenu />} />
         <Route path="/commentiErecensioni" element={<PaginaRecensioni />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/riepilogoordine" element={<VisualizzaOrdine />} />
       </Routes>
     </Router>
   );
