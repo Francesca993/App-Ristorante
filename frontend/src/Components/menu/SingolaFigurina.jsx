@@ -29,21 +29,17 @@ export default function SingolaFigurina({ piatto }) {
 
   return (
     <Col xs="12" md="12" lg="6">
-      <Card className="p-3 m-4" style={{ maxWidth: 500 }}>
+      <Card className="p-3 m-4 cardStyle">
         <div
+          className="cardImgStyle"
           style={{
-            maxWidth: 460,
-            height: 350,
-            maxHeight: 350,
             backgroundImage: `url(${piatto.immagine})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
           }}
         ></div>
         <Card.Body>
-          <Card.Title>{piatto.nome}</Card.Title>
+          <Card.Title className="titleCard">{piatto.nome}</Card.Title>
           <Card.Text>{piatto.descrizione}</Card.Text>
+          <Card.Text>{piatto.prezzo}</Card.Text>
         </Card.Body>
         {isLoggedIn ? (
           <>
@@ -51,7 +47,9 @@ export default function SingolaFigurina({ piatto }) {
             <AreaOrdine piatto={piatto} immagine={piatto.immagine} />
           </>
         ) : (
-          <Link to="/register">Registrati e ordina!</Link>
+          <Link className="cardLink" to="/register">
+            Registrati e ordina!
+          </Link>
         )}
       </Card>
     </Col>

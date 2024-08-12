@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./Components/RegisterLogin/Register.jsx";
 import Login from "./Components/RegisterLogin/Login.jsx";
 import VisualizzaOrdine from "./Components/visualizzaOrdine/VisualizzaOrdine.jsx";
+import Footer from "./Components/Footer/Footer.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/riepilogoordine" element={<VisualizzaOrdine />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

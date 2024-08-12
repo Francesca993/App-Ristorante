@@ -1,7 +1,10 @@
 import { useState } from "react"; // Importa il hook useState da React per gestire lo stato del componente
 import { useNavigate } from "react-router-dom"; // Importa useNavigate da react-router-dom per navigare tra le pagine
 import { registerUser } from "../../Services/api"; // Importa la funzione registerUser dal file api.js per effettuare la registrazione
-
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import "./registerLogin.css";
 export default function Register() {
   // Definisce lo stato del form con useState, inizializzato con campi vuoti
   const [formData, setFormData] = useState({
@@ -34,45 +37,62 @@ export default function Register() {
   };
 
   return (
-    <div className="container">
-      <h2>Registrazione</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="nome"
-          placeholder="Nome"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="cognome"
-          placeholder="Cognome"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="date"
-          name="dataDiNascita"
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Registrati</button>
-      </form>
-    </div>
+    <Container>
+      <Row>
+        <h1>Registrazione</h1>
+      </Row>
+      <Row>
+        {" "}
+        <form className="formStyle" onSubmit={handleSubmit}>
+          <label for="nome">Nome</label>
+          <input
+            type="text"
+            name="nome"
+            placeholder="Nome"
+            onChange={handleChange}
+            required
+          />{" "}
+          <label for="cognome">Cognome</label>
+          <input
+            type="text"
+            name="cognome"
+            placeholder="Cognome"
+            onChange={handleChange}
+            required
+          />
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+          />{" "}
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+          />
+          <label for="dataDiNascita">Data Di Nascita</label>
+          <input
+            type="date"
+            name="dataDiNascita"
+            onChange={handleChange}
+            required
+          />
+          <Button
+            type="submit"
+            variant="outline-secondary"
+            size="lg"
+            className="formStyleButton"
+          >
+            Invia!
+          </Button>
+        </form>
+      </Row>
+    </Container>
   );
 }

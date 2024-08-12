@@ -1,6 +1,10 @@
 import { useState } from "react"; // Importa il hook useState da React per gestire lo stato
 import { useNavigate } from "react-router-dom"; // Importa useNavigate da react-router-dom per navigare programmaticamente
 import { loginUser } from "../../Services/api"; // Importa la funzione API per effettuare il login
+import Button from "react-bootstrap/Button";
+import "./registerLogin.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -31,25 +35,36 @@ export default function Login() {
   };
 
   return (
-    <div className="container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Accedi</button>
-      </form>
-    </div>
+    <Container className="containerRegister">
+      <Row>
+        <h1>Login</h1>
+      </Row>
+      <Row>
+        <form className="formStyle" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            required
+          />
+          <Button
+            type="submit"
+            variant="outline-secondary"
+            size="lg"
+            className="formStyleButton"
+          >
+            Accedi
+          </Button>
+        </form>
+      </Row>
+    </Container>
   );
 }

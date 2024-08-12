@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "./Barradinavigazione.css";
 
 export default function BarraDiNavigazione() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,54 +36,73 @@ export default function BarraDiNavigazione() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+    <Navbar expand="lg" id="navbarStyle" className="text-center d-flex">
+      <Navbar.Brand href="#home">
+        <img
+          src="./src/assets/background/L__arte-removebg-preview2.png"
+          alt="logo"
+        />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link>
-            <Link to="/"> Home</Link>
+            <Link className="nav-link" to="/">
+              {" "}
+              Home
+            </Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/commentiErecensioni"> Recensioni&Commenti</Link>
+            <Link className="nav-link" to="/commentiErecensioni">
+              {" "}
+              Recensioni&Commenti
+            </Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/menu">Menù</Link>
+            <Link className="nav-link" to="/menu">
+              Menù
+            </Link>
           </Nav.Link>
           {isLoggedIn ? (
             <>
               <Nav.Link>
-                <Link to="/" onClick={handleLogout}>
+                <Link className="nav-link" to="/" onClick={handleLogout}>
                   Log Out
                 </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/riepilogoordine">Vai al tuo ordine</Link>
+                <Link className="nav-link" to="/riepilogoordine">
+                  Vai al tuo ordine
+                </Link>
               </Nav.Link>
             </>
           ) : (
             <>
               {" "}
               <Nav.Link>
-                <Link to="/login">Login</Link>
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
               </Nav.Link>
               <Nav.Link>
-                <Link to="/register">Registrati</Link>
+                <Link className="nav-link" to="/register">
+                  Registrati
+                </Link>
               </Nav.Link>{" "}
             </>
-          )}
-
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
-          </NavDropdown>
+          )}{" "}
+        </Nav>
+        <Nav className="ms-auto m-4">
+          <Nav.Link href="https://www.facebook.com/francesca.montini2?locale=it_IT">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </Nav.Link>
+          <Nav.Link href="https://www.instagram.com/franci.wanderlust/">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </Nav.Link>
+          <Nav.Link href="https://www.linkedin.com/in/francesca-montini-19b90929a/">
+            {" "}
+            <ion-icon name="logo-linkedin"></ion-icon>
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

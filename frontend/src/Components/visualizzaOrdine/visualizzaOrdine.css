@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+#imgCard {
+  width: 150px;
+  height: 150px;
+  max-height: 150px;
+  max-width: 150px;
+  padding: 5px;
+  object-fit: cover;
+}
+.titleStyle {
+  font-family: "Changa", sans-serif;
+}
+
+.cardStyle {
+  font-family: "Josefin Sans", sans-serif;
+}

@@ -13,6 +13,12 @@ const listaOrdineSchema = new mongoose.Schema(
     valore: {
       type: Number,
     },
+    descrizione: {
+      type: String,
+    },
+    prezzo: {
+      type: String,
+    },
   },
   { collection: "ordine" }
 );

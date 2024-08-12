@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+
+.footerStyle {
+  font-family: "Josefin Sans", sans-serif;
+  background-color: #eff5f8;
+}
+
+.footerStyle ion-icon {
+  color: black;
+  font-size: 30px;
+}
+.footerStyle h5 {
+  font-family: "Changa", sans-serif;
+}

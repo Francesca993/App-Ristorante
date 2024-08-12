@@ -6,7 +6,7 @@ import { NavLink, Link } from "react-router-dom";
 
 export default function Jumbotron() {
   return (
-    <Container xs="12" md="12" lg="12">
+    <Container id="jumbotronStyle" xs="12" md="12" lg="12">
       <div>
         <div class="p-5 mb-4 rounded-3">
           <div class="container-fluid py-5">
@@ -18,11 +18,28 @@ export default function Jumbotron() {
               godere di una cucina di altissimo livello e di un servizio in sala
               attento alle esigenze più esclusive.
             </p>
-            <Button variant="outline-secondary" size="lg">
-              <Link to="/menu"> Guarda il menù </Link>
+            <Button
+              className="buttonJumbotron"
+              variant="outline-secondary"
+              size="lg"
+            >
+              <Link className="buttonJumbotronLink p-3" to="/menu">
+                {" "}
+                Guarda il menù{" "}
+              </Link>
             </Button>{" "}
-            <Button variant="outline-secondary" size="lg">
-              <Link to="/commentiErecensioni"> Le Nostre Recensioni </Link>
+            <Button
+              className="buttonJumbotron"
+              variant="outline-secondary"
+              size="lg"
+            >
+              <Link
+                className="buttonJumbotronLink  p-3"
+                to="/commentiErecensioni"
+              >
+                {" "}
+                Le Nostre Recensioni{" "}
+              </Link>
             </Button>{" "}
           </div>
         </div>

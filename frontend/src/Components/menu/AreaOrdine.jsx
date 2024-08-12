@@ -5,11 +5,15 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
 import { createOrdine } from "../../Services/api";
+import { useNavigate } from "react-router-dom";
 
 export default function AreaOrdine({ piatto }) {
+  const navigate = useNavigate();
   const [ordine, setOrdine] = useState({
     nome: piatto.nome,
     foto: piatto.immagine,
+    descrizione: piatto.descrizione,
+    prezzo: piatto.prezzo,
     valore: "",
   });
 
@@ -22,6 +26,13 @@ export default function AreaOrdine({ piatto }) {
     e.preventDefault();
     try {
       await createOrdine(ordine);
+      setOrdine({
+        nome: "",
+        foto: "",
+        valore: "",
+        descrizione: "",
+        prezzo: "",
+      });
     } catch (err) {
       console.error("errore nell'inserimento dell'ordine", err);
     }
@@ -31,7 +42,12 @@ export default function AreaOrdine({ piatto }) {
     <Container>
       <Row>
         <Col>
-          <Button type="submit" variant="secondary" onClick={handleSubmit}>
+          <Button
+            className="buttonStyle"
+            type="submit"
+            variant="outline-secondary"
+            onClick={handleSubmit}
+          >
             Aggiungi al carrello
           </Button>
         </Col>

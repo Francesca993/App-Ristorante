@@ -4,29 +4,19 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
-import { getPosts } from "../../Services/api";
+import { deletePost } from "../../Services/api";
 
-export default function VisualizzaRecensioni() {
-  const [posts, setPosts] = useState([]);
+export default function VisualizzaRecensioni({ fetchPosts, posts }) {
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await getPosts();
-        setPosts(response.data);
-      } catch (err) {
-        console.error("Errore nella visualizzazione di tutti i post");
-      }
-    };
     fetchPosts();
   }, []);
   return (
-    <div style={{ border: "1px solid black", margin: "15px", padding: "20px" }}>
+    <div className="visualizzaRecensioniContainer">
       <Container>
         <h1>LE VOSTRE RECENSIONI</h1>
         <Row>
           {posts.map((post) => (
-            <Col key={post._id}>
+            <Col xs md lg={12} key={post._id} className="m-2">
               <div className="card">
                 <div className="card-header">
                   AUTORE RECENSIONE: {post.name}
@@ -36,6 +26,9 @@ export default function VisualizzaRecensioni() {
                     TITOLO RECENSIONE:{post.titolo}
                   </h5>
                   <p className="card-text">{post.content}</p>
+                  <Button onClick={() => deletePost(post._id)}>
+                    Delete
+                  </Button>{" "}
                 </div>
               </div>
             </Col>

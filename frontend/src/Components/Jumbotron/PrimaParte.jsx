@@ -2,15 +2,16 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
 import Jumbotron from "./Jumbotron";
+import "./jumbotron.css";
 
 export default function PrimaParte() {
   return (
     <>
-      <Carousel data-bs-theme="dark">
+      <Carousel className="m-3  carousel-image" data-bs-theme="dark">
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://picsum.photos/1300/500"
+            src="./src/assets/fotoRistorante/immagine2.jpg"
             alt="First slide"
           />
           <Carousel.Caption>
@@ -23,7 +24,7 @@ export default function PrimaParte() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://picsum.photos/1300/500"
+            src="./src/assets/fotoRistorante/immagine3.jpg"
             alt="Second slide"
           />
           <Carousel.Caption>
@@ -36,7 +37,7 @@ export default function PrimaParte() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://picsum.photos/1300/500"
+            src="./src/assets/fotoRistorante/Immagine1.png"
             alt="Third slide"
           />
           <Carousel.Caption>
