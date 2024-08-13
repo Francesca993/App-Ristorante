@@ -7,6 +7,7 @@ import ordineRoutes from "./routes/ordineRoutes.js";
 import authorRoutes from "./routes/authorRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
+
 // importo i middleware
 import {
   badRequestHandler,
@@ -30,7 +31,7 @@ app.use("/api/authors", authorRoutes);
 app.use("/api/posts", blogPostRoutes);
 app.use("/api/ordine", ordineRoutes);
 app.listen(PORT, () => {
-  console.log("server acceso sulla porta");
+  console.log("server acceso sulla porta ", PORT);
   console.log("sono disponibili i seguenti endpoints");
   console.table(endpoints(app));
 });

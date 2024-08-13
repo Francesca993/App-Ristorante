@@ -10,6 +10,7 @@ export default function VisualizzaRecensioni({ fetchPosts, posts }) {
   useEffect(() => {
     fetchPosts();
   }, []);
+
   return (
     <div className="visualizzaRecensioniContainer">
       <Container>

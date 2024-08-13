@@ -7,13 +7,18 @@ import React, { useState } from "react";
 import { createOrdine } from "../../Services/api";
 import { useNavigate } from "react-router-dom";
 
-export default function AreaOrdine({ piatto }) {
+export default function AreaOrdine({
+  pnome,
+  pimmagine,
+  pdescrizione,
+  pprezzo,
+}) {
   const navigate = useNavigate();
   const [ordine, setOrdine] = useState({
-    nome: piatto.nome,
-    foto: piatto.immagine,
-    descrizione: piatto.descrizione,
-    prezzo: piatto.prezzo,
+    nome: pnome,
+    foto: pimmagine,
+    descrizione: pdescrizione,
+    prezzo: pprezzo,
     valore: "",
   });
 

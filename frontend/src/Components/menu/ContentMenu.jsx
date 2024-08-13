@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import "./menu.css";
 
 export default function ContentMenu() {
-  let antipasti = [
+  const antipasti = [
     {
       nome: "Carpaccio di Scampi con Agrumi e Caviale",
       descrizione:
@@ -37,7 +37,7 @@ export default function ContentMenu() {
     },
   ];
 
-  let primi = [
+  const primi = [
     {
       nome: "Risotto allo Zafferano con Gamberi Rossi e Polvere di Olive Nere",
       descrizione:
@@ -68,7 +68,7 @@ export default function ContentMenu() {
     },
   ];
 
-  let secondi = [
+  const secondi = [
     {
       nome: "Filetto di Manzo al Vino Rosso con Purea di Topinambur",
       descrizione:
@@ -113,7 +113,7 @@ export default function ContentMenu() {
     },
   ];
 
-  let vini = [
+  const vini = [
     {
       nome: "Château Margaux",
       descrizione:

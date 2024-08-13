@@ -44,7 +44,13 @@ export default function SingolaFigurina({ piatto }) {
         {isLoggedIn ? (
           <>
             {" "}
-            <AreaOrdine piatto={piatto} immagine={piatto.immagine} />
+            <AreaOrdine
+              piatto={piatto}
+              pnome={piatto.nome}
+              pimmagine={piatto.immagine}
+              pdescrizione={piatto.descrizione}
+              pprezzo={piatto.prezzo}
+            />
           </>
         ) : (
           <Link className="cardLink" to="/register">
