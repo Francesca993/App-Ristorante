@@ -15,6 +15,14 @@ export const createOrdine = (ordineData) => api.post("/ordine/", ordineData);
 export const updateOrdine = (ordineData, id) =>
   api.put(`/ordine/${id}`, ordineData);
 export const deleteOrdine = (id) => api.delete(`/ordine/${id}`);
+//ROTTE PER LE PRENOTAZIONI
+export const getPrenotazioni = () => api.get("/prenotazioni");
+export const getPrenotazione = () => api.get(`/prenotazioni/${id}`);
+export const createPrenotazione = (formData) =>
+  api.post("/prenotazioni/", formData);
+export const updatePrenotazione = (formData, id) =>
+  api.put(`/prenotazioni/${id}`, formData);
+export const deletePrenotazione = (id) => api.delete(`/prenotazioni/${id}`);
 //ROTTEPER AUTENTICAZIONE
 //Funzione per registrare un nuovo utente
 export const registerUser = (userData) => api.post("/authors", userData);

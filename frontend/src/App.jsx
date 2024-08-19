@@ -9,6 +9,7 @@ import Register from "./Components/RegisterLogin/Register.jsx";
 import Login from "./Components/RegisterLogin/Login.jsx";
 import VisualizzaOrdine from "./Components/visualizzaOrdine/VisualizzaOrdine.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
+import Prenota from "./Components/PrenotaTavolo/Prenota.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/riepilogoordine" element={<VisualizzaOrdine />} />
+        <Route path="/prenota" element={<Prenota />} />
       </Routes>
       <Footer />
     </Router>

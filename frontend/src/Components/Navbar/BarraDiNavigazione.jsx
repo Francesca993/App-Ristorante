@@ -59,6 +59,11 @@ export default function BarraDiNavigazione() {
             </Link>
           </Nav.Link>
           <Nav.Link>
+            <Link className="nav-link" to="/prenota">
+              Prenota
+            </Link>
+          </Nav.Link>
+          <Nav.Link>
             <Link className="nav-link" to="/menu">
               Menù
             </Link>

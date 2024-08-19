@@ -223,10 +223,10 @@ export default function ContentMenu() {
           >
             La carta dei Vini
           </Button>{" "}
-          {type === "antipasti" && <Figurina antipasti={antipasti} />}
-          {type === "primi" && <Figurina primiPiatti={primi} />}
-          {type === "secondi" && <Figurina secondi={secondi} />}
-          {type === "vini" && <Figurina vini={vini} />}
+          {type === "antipasti" && <Figurina piatti={antipasti} />}
+          {type === "primi" && <Figurina piatti={primi} />}
+          {type === "secondi" && <Figurina piatti={secondi} />}
+          {type === "vini" && <Figurina piatti={vini} />}
         </div>
       </Row>
       <Figurina piatti={type} />
