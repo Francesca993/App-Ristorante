@@ -3,6 +3,7 @@ import "./prenota.css";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   getPrenotazioni,
   getPrenotazione,
@@ -18,6 +19,8 @@ export default function Prenota() {
     ora: "",
     telefono: "",
   }); // Gestore per aggiornare lo stato quando i campi del form cambiano
+
+  const navigate = useNavigate();
   const handleChange = (e) => {
     // Aggiorna il campo corrispondente nello stato con il valore attuale dell'input
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,6 +32,7 @@ export default function Prenota() {
     try {
       await createPrenotazione(formData); //
       alert("Prenotazione avvenuta con successo!"); // Mostra un messaggio di successo
+      navigate("/menu");
     } catch (error) {
       console.error("Errore durante la prenotazione:", error); // Logga l'errore in console
       alert("Errore durante la prenotazione. Riprova."); // Mostra un messaggio di errore

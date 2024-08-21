@@ -34,7 +34,10 @@ app.use("/api/posts", blogPostRoutes);
 app.use("/api/ordine", ordineRoutes);
 app.use("/api/prenotazioni", prenotazioniRoutes);
 // Applicazione dei middleware per la gestione degli errori
-
+app.use(badRequestHandler); // Gestisce errori 400 Bad Request
+app.use(unauthorizedHandler); // Gestisce errori 401 Unauthorized
+app.use(notFoundHandler); // Gestisce errori 404 Not Found
+app.use(genericErrorHandler); // Gestisce tutti gli altri errori
 app.listen(PORT, () => {
   console.log("server acceso sulla porta ", PORT);
   console.log("sono disponibili i seguenti endpoints");
