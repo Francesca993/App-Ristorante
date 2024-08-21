@@ -1,6 +1,6 @@
 # 🍽️ AppRistorante
 
-Benvenuti in **AppRistorante**! Questa è l'app pensata per il Capstone Project Epicode. 
+Benvenuti in **AppRistorante**! Questa è l'app pensata per il Capstone Project Epicode.
 Con **RistoranteApp**, puoi prenotare tavoli, sfogliare il menu, e molto altro ancora!
 
 ## 🚀 Funzionalità
@@ -13,7 +13,7 @@ Con **RistoranteApp**, puoi prenotare tavoli, sfogliare il menu, e molto altro a
 
 ## 🛠️ Tecnologie Utilizzate
 
-- **Frontend**: React, HTML5, CSS3
+- **Frontend**: React, HTML5, CSS3, Bootstrap
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
 - **API**: Axios per la gestione delle richieste HTTP
@@ -21,13 +21,21 @@ Con **RistoranteApp**, puoi prenotare tavoli, sfogliare il menu, e molto altro a
 ## 💻 Installazione
 
 1. **Clona il repository:**
-2.  **Lancia npm install nella cartella front-end**
-3.   **Lancia npm install nella cartella back-end**
-4.   **Avvia il server: node server.js**
-5.   **Avvia il client con npm run-dev nella cartella front-end**
 
-   
+```
+2. cd front-end
+npm install
+
+3. cd back-end
+npm install
+
+```
+
+4.  **Avvia il server: node server.js**
+5.  **Avvia il client con npm run-dev nella cartella front-end**
+
 ## 📦 Struttura del Progetto
+
 ```
 app-ristorante/
 │
@@ -39,7 +47,7 @@ app-ristorante/
 │   │   └── upload.js
 │   │
 │   ├── models/
-│   │   ├── Author.js 
+│   │   ├── Author.js
 │   │   └── BlogPost.js
 │   │   ├── ListaOrdine.js
 │   │   └── Prenotazioni.js
@@ -48,7 +56,7 @@ app-ristorante/
 │   │
 │   ├── routes/
 │   │   ├── authorRoutes.js
-│   │   ├── authRoutes.js 
+│   │   ├── authRoutes.js
 │   │   └── blogPostRoutes.js
 │   │   ├── ordineRoutes.js
 │   │   └── prenotazioniPostRoutes.js
@@ -60,7 +68,7 @@ app-ristorante/
 │   ├── utils/
 │   │   └── jwt.js
 │   │
-│   ├── .env 
+│   ├── .env
 │   ├── .gitignore
 │   ├── package-lock.json
 │   ├── package.json
@@ -124,11 +132,28 @@ app-ristorante/
     └──  vite.config.js
 
 ```
+
 ## 📚 API Endpoints
+
 ### Prenotazione Tavoli
+
 POST /api/prenotazioni - Crea una nuova prenotazione.
-GET /api/prenotazioni/:id - Ottieni i dettagli di una prenotazione.
-Menu
-GET /api/menu - Ottieni l'elenco dei piatti disponibili.
-GET /api/menu/:id - Ottieni i dettagli di un piatto specifico
-   
+GET/DELETE /api/prenotazioni/:id - Ottieni i dettagli o cancella una prenotazione.
+
+### Recensioni
+
+POST /api/posts - Crea una nuova recensione.
+GET /api/posts - Ottiene tutte le rensioni.
+DELETE /api/posts/:id - Cancella singola recensione.
+
+### Ordini
+
+POST /api/ordine - Crea un nuovo ordine.
+GET /api/ordine - Ottiene tutti glli ordini.
+DELETE /api/ordine/:id - Cancella singolo ordine.
+
+## 📞 Contatti
+
+Per domande o suggerimenti:
+
+📧 Email: montinifrancesca993@gmail.com
