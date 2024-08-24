@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createOrdine } from "../../Services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -21,6 +21,16 @@ export default function AreaOrdine({
     prezzo: pprezzo,
     valore: "",
   });
+  // Utilizza useEffect per aggiornare l'ordine quando cambiano le props
+  useEffect(() => {
+    setOrdine({
+      nome: pnome,
+      foto: pimmagine,
+      descrizione: pdescrizione,
+      prezzo: pprezzo,
+      valore: "",
+    });
+  }, [pnome, pimmagine, pdescrizione, pprezzo]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,6 +48,7 @@ export default function AreaOrdine({
         descrizione: "",
         prezzo: "",
       });
+      window.location.reload();
     } catch (err) {
       console.error("errore nell'inserimento dell'ordine", err);
     }

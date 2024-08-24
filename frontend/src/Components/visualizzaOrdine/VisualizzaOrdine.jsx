@@ -12,56 +12,78 @@ import "./visualizzaOrdine.css";
 export default function VisualizzaOrdine() {
   const navigate = useNavigate(); // Inizializza useNavigate per poter navigare programmaticamente
   const [ordine, setOrdine] = useState([]);
+  const [totale, setTotale] = useState(0); // Stato per il totale del carrello
+
   useEffect(() => {
     const fetchOrdine = async () => {
       try {
         const response = await getOrdine();
         setOrdine(response.data);
+        // Calcolo del totale
+        const sommaTotale = response.data.reduce(
+          (acc, piatto) =>
+            acc + parseFloat(piatto.prezzo) * parseFloat(piatto.valore),
+          0
+        );
+        setTotale(sommaTotale);
       } catch (err) {
-        console.error("Errore nella visualizzazione dell''ordine");
+        console.error("Errore nella visualizzazione dell'ordine");
       }
     };
     fetchOrdine();
   }, []);
+  const handleDelete = async (id) => {
+    try {
+      await deleteOrdine(id);
 
-  /* const handleDelete = async () => {
-       try {
-         const response = await deleteOrdine(piatti._id);
-           console.log("Item deleted:", response.data);
-            navigate("/riepilogoordine");
-         // Puoi aggiungere ulteriori azioni qui, come aggiornare lo stato locale o notificare l'utente.
-       } catch (error) {
-         console.error("There was an error deleting the item:", error);
-         // Gestisci l'errore in base alle necessità, ad esempio mostrando un messaggio di errore all'utente.
-       }
-    };*/
+      // Filtra fuori l'elemento cancellato dallo stato
+      const nuovoOrdine = ordine.filter((piatto) => piatto._id !== id);
+      setOrdine(nuovoOrdine);
+
+      // Ricalcola il totale dopo la cancellazione
+      const nuovoTotale = nuovoOrdine.reduce(
+        (acc, piatto) =>
+          acc + parseFloat(piatto.prezzo) * parseFloat(piatto.valore),
+        0
+      );
+      setTotale(nuovoTotale);
+
+      navigate("/riepilogoordine");
+    } catch (error) {
+      console.error("Errore durante l'eliminazione dell'elemento:", error);
+    }
+  };
 
   return (
     <div>
       <Container>
         <Row>
-          <Row>
-            {ordine.map((piatti) => (
-              <Col lg={12} key={piatti._id}>
-                <Card className="d-flex flex-row cardStyle align-items-center m-2">
-                  <Card.Img variant="top" src={piatti.foto} id="imgCard" />
-                  <Card.Body>
-                    <Card.Title className="titleStyle">
-                      {piatti.nome}
-                    </Card.Title>
-                    <Card.Text>
-                      <p>{piatti.descrizione}</p>
-                      <p>Quantita:{piatti.valore}</p>
-                      <p>Prezzo:{piatti.prezzo}</p>
-                    </Card.Text>
-                    <Button onClick={() => deleteOrdine(piatti._id)}>
-                      Delete
-                    </Button>{" "}
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+          {ordine.map((piatti) => (
+            <Col lg={12} key={piatti._id}>
+              <Card className="d-flex flex-row cardStyle align-items-center m-2">
+                <Card.Img variant="top" src={piatti.foto} id="imgCard" />
+                <Card.Body>
+                  <Card.Title className="titleStyle">{piatti.nome}</Card.Title>
+                  <Card.Text>
+                    <p>{piatti.descrizione}</p>
+                    <p>Quantita:{piatti.valore}</p>
+                    <p>Prezzo:{piatti.prezzo}</p>
+                  </Card.Text>
+                  <Button onClick={() => handleDelete(piatti._id)}>
+                    Delete
+                  </Button>{" "}
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+        <Row>
+          <Col lg={12}>
+            <h2 className="text-end m-4">Totale Carrello: €{totale}</h2>
+          </Col>
+          <Col>
+            <Button>Invia Ordine!</Button>{" "}
+          </Col>
         </Row>
       </Container>
     </div>
