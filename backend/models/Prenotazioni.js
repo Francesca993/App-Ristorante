@@ -14,6 +14,10 @@ const prenotazioniSchema = new mongoose.Schema(
     telefono: {
       type: String,
     },
+    email: {
+      type: String,
+      required: true, // Campo obbligatorio per associare l'ordine all'utente
+    },
   },
   { collection: "prenotazioni" }
 );

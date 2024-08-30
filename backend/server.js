@@ -16,6 +16,7 @@ import {
   notFoundHandler,
   genericErrorHandler,
 } from "./middleware/errorHandlers.js";
+import { authMiddleware } from "./middleware/authMiddleware.js";
 
 dotenv.config();
 const app = express();
@@ -26,20 +27,21 @@ mongoose
   .then(() => console.log("mongodb connesso"))
   .catch((err) => console.error("MONGO DB: ERRORE ", err));
 
-const PORT = process.env.PORT || 6001;
-
 app.use("/api/auth", authRoutes); // rotte per autenticaione
-app.use("/api/authors", authorRoutes);
 app.use("/api/posts", blogPostRoutes);
-app.use("/api/ordine", ordineRoutes);
-app.use("/api/prenotazioni", prenotazioniRoutes);
+app.use("/api/authors", authMiddleware, authorRoutes);
+app.use("/api/ordine", authMiddleware, ordineRoutes);
+app.use("/api/prenotazioni", authMiddleware, prenotazioniRoutes);
+
+const PORT = process.env.PORT || 6001;
 // Applicazione dei middleware per la gestione degli errori
 app.use(badRequestHandler); // Gestisce errori 400 Bad Request
 app.use(unauthorizedHandler); // Gestisce errori 401 Unauthorized
 app.use(notFoundHandler); // Gestisce errori 404 Not Found
 app.use(genericErrorHandler); // Gestisce tutti gli altri errori
+
 app.listen(PORT, () => {
-  console.log("server acceso sulla porta ", PORT);
+  console.log(`Server in esecuzione sulla porta ${PORT}`);
   console.log("sono disponibili i seguenti endpoints");
   console.table(endpoints(app));
 });

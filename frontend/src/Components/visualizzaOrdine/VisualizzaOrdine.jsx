@@ -81,7 +81,7 @@ export default function VisualizzaOrdine() {
           <Col lg={12}>
             <h2 className="text-end m-4">Totale Carrello: €{totale}</h2>
           </Col>
-          <Col>
+          <Col className="d-flex justify-content-end m-4">
             <Button>Invia Ordine!</Button>{" "}
           </Col>
         </Row>

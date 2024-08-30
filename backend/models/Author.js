@@ -10,6 +10,12 @@ const authorSchema = new mongoose.Schema(
     dataDiNascita: { type: String, required: true },
     avatar: { type: String }, // Campo opzionale per l'URL dell'avatar
     password: { type: String, required: true }, // NEW! Campo per la password (sarà hashata)
+    ruolo: {
+      type: String,
+      enum: ["user", "admin"], // Definisce i possibili valori per il campo
+      default: "user", // Imposta "user" come valore predefinito
+      required: true,
+    },
   },
   {
     timestamps: true, // Aggiunge automaticamente campi createdAt e updatedAt

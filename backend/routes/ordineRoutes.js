@@ -4,6 +4,7 @@ import ListaOrdine from "../models/ListaOrdine.js";
 
 const router = express.Router();
 //router.use(authMiddleware); per consentire solo a chi è autenticato di fare ordini
+
 //Ottenere la lista di tutti gli ordini
 router.get("/", async (req, res) => {
   try {
@@ -13,6 +14,18 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+//ROTTA PER OTTENERE GLI ORDINE PER IL LOGIN
+/* 
+router.get("/", async (req, res) => {
+ try {
+    const OrdineTotale = await ListaOrdine.find({ email: req.user.email }); // Filtra per email
+    res.json(OrdineTotale);
+  } catch (err) {
+    res.st
+    atus(500).json({ message: err.message });
+  }
+
+ */
 //Rotta singolo ordine
 router.get("/:id", async (req, res) => {
   try {

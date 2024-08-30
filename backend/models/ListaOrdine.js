@@ -19,6 +19,10 @@ const listaOrdineSchema = new mongoose.Schema(
     prezzo: {
       type: String,
     },
+    email: {
+      type: String,
+      required: true, // Campo obbligatorio per associare l'ordine all'utente
+    },
   },
   { collection: "ordine" }
 );

@@ -60,17 +60,10 @@ export default function Prenota() {
             onChange={handleChange}
           />
           <label htmlFor="date">Scegli il giorno</label>
-          <input
-            type="date"
-            name="dataDiPrenotazione"
-            required
-            onChange={handleChange}
-          />
-          <label htmlFor="orario">Seleziona un orario:</label>
-          <select name="orario" required>
-            <option value="" name="orario" onChange={handleChange}>
-              Seleziona un orario
-            </option>
+          <input type="date" name="data" required onChange={handleChange} />
+          <label htmlFor="ora">Seleziona un orario:</label>
+          <select name="ora" onChange={handleChange} required>
+            <option value="">Seleziona un orario</option>
             <option value="12:00">12:00</option>
             <option value="12:30">12:30</option>
             <option value="13:00">13:00</option>

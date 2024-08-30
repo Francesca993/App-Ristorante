@@ -3,13 +3,32 @@ import axios from "axios";
 const API_URL = "http://localhost:4505/api/";
 const api = axios.create({ baseURL: API_URL });
 
+// Aggiungi un interceptor per includere il token in tutte le richieste
+api.interceptors.request.use(
+  (config) => {
+    // Recupera il token dalla memoria locale
+    const token = localStorage.getItem("token");
+    if (token) {
+      // Se il token esiste, aggiungilo all'header di autorizzazione
+      config.headers["Authorization"] = `Bearer ${token}`;
+      console.log("Token inviato:", token); // Log del token inviato per debugging
+    }
+    return config; // Restituisce la configurazione aggiornata
+  },
+  (error) => {
+    // Gestisce eventuali errori durante l'invio della richiesta
+    return Promise.reject(error);
+  }
+);
+
 export const getPosts = () => api.get("/posts");
 export const getPost = () => api.get(`/posts/${id}`);
 export const createPost = (postData) => api.post("/posts/", postData);
 export const updatePost = (postData, id) => api.put(`/posts/${id}`, postData);
 export const deletePost = (id) => api.delete(`/posts/${id}`);
 //rotte per prendere l'ordine
-export const getOrdine = () => api.get("/ordine");
+export const getOrdine = () =>
+  api.get("/ordine", { headers: { Authorization: `Bearer ${token}` } });
 export const getPiatto = () => api.get(`/ordine/${id}`);
 export const createOrdine = (ordineData) => api.post("/ordine/", ordineData);
 export const updateOrdine = (ordineData, id) =>
@@ -23,7 +42,8 @@ export const createPrenotazione = (formData) =>
 export const updatePrenotazione = (formData, id) =>
   api.put(`/prenotazioni/${id}`, formData);
 export const deletePrenotazione = (id) => api.delete(`/prenotazioni/${id}`);
-//ROTTEPER AUTENTICAZIONE
+
+//ROTTE PER AUTENTICAZIONE
 //Funzione per registrare un nuovo utente
 export const registerUser = (userData) => api.post("/authors", userData);
 //Funzione per effettuare il login di un utente
