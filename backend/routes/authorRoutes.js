@@ -1,9 +1,10 @@
 import express from "express";
 import Author from "../models/Author.js";
+import ListaOrdine from "../models/ListaOrdine.js";
 
 const router = express.Router();
 
-// GET /authors: ritorna la lista degli autori
+// GET /authors: ritorna la lista degli user
 router.get("/", async (req, res) => {
   try {
     // Recupera tutti gli autori dal database
@@ -16,14 +17,14 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET /authors/123: ritorna il singolo autore
+// GET /authors/123: ritorna il singolo user
 router.get("/:id", async (req, res) => {
   try {
     // Cerca un autore specifico per ID
     const author = await Author.findById(req.params.id);
     if (!author) {
       // Se l'autore non viene trovato, invia una risposta 404
-      return res.status(404).json({ message: "Autore non trovato" });
+      return res.status(404).json({ message: "User non trovato" });
     }
     // Invia l'autore trovato come risposta JSON
     res.json(author);
@@ -33,7 +34,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// NEW! POST /authors: crea un nuovo autore
+// NEW! POST /authors: crea un nuovo user
 router.post("/", async (req, res) => {
   try {
     // Crea una nuova istanza di Author con i dati dalla richiesta
@@ -42,14 +43,14 @@ router.post("/", async (req, res) => {
     // La password verrà automaticamente hashata grazie al middleware pre-save
     // che abbiamo aggiunto nello schema Author
 
-    // Salva il nuovo autore nel database
+    // Salva il nuovo user nel database
     const newAuthor = await author.save();
 
     // Rimuovi la password dalla risposta per sicurezza
     const authorResponse = newAuthor.toObject();
     delete authorResponse.password;
 
-    // Invia il nuovo autore creato come risposta JSON con status 201 (Created)
+    // Invia il nuovo user creato come risposta JSON con status 201 (Created)
     res.status(201).json(authorResponse);
   } catch (err) {
     // In caso di errore (es. validazione fallita), invia una risposta di errore
@@ -57,20 +58,20 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PUT /authors/123: modifica l'autore con l'id associato
+// PUT /authors/123: modifica l'user con l'id associato
 router.put("/:id", async (req, res) => {
   try {
-    // Trova e aggiorna l'autore nel database
+    // Trova e aggiorna l'user nel database
     const updatedAuthor = await Author.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
     if (!updatedAuthor) {
-      // Se l'autore non viene trovato, invia una risposta 404
+      // Se l'user non viene trovato, invia una risposta 404
       return res.status(404).json({ message: "Autore non trovato" });
     }
-    // Invia l'autore aggiornato come risposta JSON
+    // Invia l'user aggiornato come risposta JSON
     res.json(updatedAuthor);
   } catch (err) {
     // In caso di errore, invia una risposta di errore
@@ -78,36 +79,36 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE /authors/123: cancella l'autore con l'id associato
+// DELETE /authors/123: cancella l'user con l'id associato
 router.delete("/:id", async (req, res) => {
   try {
-    // Trova e elimina l'autore dal database
+    // Trova e elimina l'user dal database
     const deletedAuthor = await Author.findByIdAndDelete(req.params.id);
     if (!deletedAuthor) {
-      // Se l'autore non viene trovato, invia una risposta 404
+      // Se l'user non viene trovato, invia una risposta 404
       return res.status(404).json({ message: "Autore non trovato" });
     }
     // Invia un messaggio di conferma come risposta JSON
-    res.json({ message: "Autore eliminato" });
+    res.json({ message: "User eliminato" });
   } catch (err) {
     // In caso di errore, invia una risposta di errore
     res.status(500).json({ message: err.message });
   }
 });
 
-// GET /authors/:id/blogPosts: ricevi tutti i blog post di uno specifico autore
+// GET /authors/:id/ordine: ricevi tutti gli ordini di uno specifico user
 router.get("/:id/ordine", async (req, res) => {
   try {
     // Cerca l'autore specifico per ID
     const author = await Author.findById(req.params.id);
     if (!author) {
-      // Se l'autore non viene trovato, invia una risposta 404
-      return res.status(404).json({ message: "Autore non trovato" });
+      // Se l'user non viene trovato, invia una risposta 404
+      return res.status(404).json({ message: "User non trovato" });
     }
-    // Cerca tutti i blog post dell'autore usando la sua email
-    const blogPosts = await BlogPost.find({ author: author.email });
+    // Cerca gli ordini dell'autore usando la sua email
+    const OrdineTotale = await ListaOrdine.find({ author: author.email });
     // Invia la lista dei blog post come risposta JSON
-    res.json(blogPosts);
+    res.json(OrdineTotale);
   } catch (err) {
     // In caso di errore, invia una risposta di errore
     res.status(500).json({ message: err.message });
