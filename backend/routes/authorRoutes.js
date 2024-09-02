@@ -96,7 +96,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // GET /authors/:id/blogPosts: ricevi tutti i blog post di uno specifico autore
-router.get("/:id/blogPosts", async (req, res) => {
+router.get("/:id/ordine", async (req, res) => {
   try {
     // Cerca l'autore specifico per ID
     const author = await Author.findById(req.params.id);
@@ -113,37 +113,5 @@ router.get("/:id/blogPosts", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-// PATCH /authors/:authorId/avatar: carica un'immagine avatar per l'autore specificato
-router.patch(
-  "/:authorId/avatar",
-  //cloudinaryUploader.single("avatar"), se dovessi aggiungere l'avatar
-  async (req, res) => {
-    try {
-      // Verifica se è stato caricato un file, se non l'ho caricato rispondo con un 400
-      if (!req.file) {
-        return res.status(400).json({ message: "Nessun file caricato" });
-      }
-
-      // Cerca l'autore nel database, se non esiste rispondo con una 404
-      const author = await Author.findById(req.params.authorId);
-      if (!author) {
-        return res.status(404).json({ message: "Autore non trovato" });
-      }
-
-      // Aggiorna l'URL dell'avatar dell'autore con l'URL fornito da Cloudinary
-      author.avatar = req.file.path;
-
-      // Salva le modifiche nel db
-      await author.save();
-
-      // Invia la risposta con l'autore aggiornato
-      res.json(author);
-    } catch (error) {
-      console.error("Errore durante l'aggiornamento dell'avatar:", error);
-      res.status(500).json({ message: "Errore interno del server" });
-    }
-  }
-);
 
 export default router;
