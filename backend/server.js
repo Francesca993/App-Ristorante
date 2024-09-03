@@ -29,9 +29,9 @@ mongoose
 
 app.use("/api/auth", authRoutes); // rotte per autenticaione
 app.use("/api/posts", blogPostRoutes);
-app.use("/api/authors", authMiddleware, authorRoutes);
+app.use("/api/authors", authorRoutes);
 app.use("/api/ordine", authMiddleware, ordineRoutes);
-app.use("/api/prenotazioni", authMiddleware, prenotazioniRoutes);
+app.use("/api/prenotazioni", prenotazioniRoutes);
 
 const PORT = process.env.PORT || 6001;
 // Applicazione dei middleware per la gestione degli errori

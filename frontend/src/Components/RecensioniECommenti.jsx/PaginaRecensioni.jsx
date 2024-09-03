@@ -8,10 +8,13 @@ import "./recensioniEcommenti.css";
 
 export default function PaginaRecensioni() {
   const [posts, setPosts] = useState([]);
-  const fetchPosts = async () => {
+  const [limit] = useState(5);
+
+  const fetchPosts = async (page = 1) => {
     try {
-      const response = await getPosts();
-      setPosts(response.data);
+      const response = await getPosts(page, limit);
+      console.log(response);
+      setPosts(response.posts);
     } catch (err) {
       console.error("Errore nella visualizzazione di tutti i post");
     }

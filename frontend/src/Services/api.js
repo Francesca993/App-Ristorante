@@ -21,7 +21,24 @@ api.interceptors.request.use(
   }
 );
 
-export const getPosts = () => api.get("/posts");
+// Funzione per ottenere i post con paginazione
+export const getPosts = async (currentPage = 1, limit = 5) => {
+  try {
+    // Chiamata GET con parametri di query
+    const response = await api.get("/posts", {
+      params: {
+        page: currentPage,
+        limit: limit,
+      },
+    });
+
+    // Restituisci i dati della risposta
+    return response.data;
+  } catch (error) {
+    console.error("Errore nella richiesta GET dei post:", error);
+    throw error; // Rilancia l'errore per la gestione a livello di chiamata
+  }
+};
 export const getPost = () => api.get(`/posts/${id}`);
 export const createPost = (postData) => api.post("/posts/", postData);
 export const updatePost = (postData, id) => api.put(`/posts/${id}`, postData);

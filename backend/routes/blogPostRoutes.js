@@ -2,12 +2,33 @@ import express from "express";
 import BlogPost from "../models/BlogPost.js";
 
 const router = express.Router();
+
 //Ottenere la lista di tutti i post
-router.get("/", async (req, res) => {
+/*router.get("/", async (req, res) => {
   try {
     const posts = await BlogPost.find({});
     res.json(posts);
   } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});*/
+
+// Rotta per ottenere i post con paginazione
+
+router.get("/", async (req, res) => {
+  try {
+    const { page = 1, limit = 5 } = req.query;
+    const posts = await BlogPost.find()
+      .limit(limit)
+      .skip((page - 1) * limit);
+
+    const count = await BlogPost.countDocuments();
+    res.json({
+      posts,
+      currentPage: page,
+      totalPages: Math.ceil(count / limit),
+    });
+  } catch (error) {
     res.status(500).json({ message: err.message });
   }
 });
@@ -55,6 +76,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 //Rotta per creare una recensione
 router.post("/", async (req, res) => {
   const singoloPost = new BlogPost(req.body);
@@ -65,6 +87,7 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 //rotta per aggiornare una recensione
 router.patch("/:id", async (req, res) => {
   try {

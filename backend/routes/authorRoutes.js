@@ -99,7 +99,7 @@ router.delete("/:id", async (req, res) => {
 // GET /authors/:id/ordine: ricevi tutti gli ordini di uno specifico user
 router.get("/:id/ordine", async (req, res) => {
   try {
-    // Cerca l'autore specifico per ID
+    // Cerca l'user specifico per ID
     const author = await Author.findById(req.params.id);
     if (!author) {
       // Se l'user non viene trovato, invia una risposta 404
