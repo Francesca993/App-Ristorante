@@ -1,11 +1,10 @@
 import express from "express";
 import ListaOrdine from "../models/ListaOrdine.js";
-import Author from "../models/Author.js";
-// import authMiddleware from "";
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 //router.use(authMiddleware); per consentire solo a chi è autenticato di fare ordini
-
+/*
 //Ottenere la lista di tutti gli ordini
 router.get("/", async (req, res) => {
   try {
@@ -15,18 +14,19 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+*/
+
 //ROTTA PER OTTENERE GLI ORDINE PER IL LOGIN
-/* 
-router.get("/", async (req, res) => {
- try {
-    const OrdineTotale = await ListaOrdine.find({ email: req.user.email }); // Filtra per email
+router.get("/", authMiddleware, async (req, res) => {
+  try {
+    // Filtra gli ordini per l'utente loggato
+    const OrdineTotale = await ListaOrdine.find({ author: req.author._id });
     res.json(OrdineTotale);
   } catch (err) {
-    res.st
-    atus(500).json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
+});
 
- */
 //Rotta singolo ordine
 router.get("/:id", async (req, res) => {
   try {
@@ -38,8 +38,9 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+/*
 //Rotta per creare un ordine
-router.post("/", async (req, res) => {
+router.post("/", authMiddleware, async (req, res) => {
   const singoloPiatto = new ListaOrdine(req.body);
   try {
     const newOrdine = await singoloPiatto.save();
@@ -48,6 +49,24 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+*/
+
+//Rotta per creare un ordine associato all'id
+router.post("/", authMiddleware, async (req, res) => {
+  try {
+    // Associa l'ID dell'utente loggato all'ordine
+    const singoloPiatto = new ListaOrdine({
+      ...req.body,
+      author: req.author._id, // `_id` è l'ID dell'utente loggato ottenuto dal middleware
+    });
+
+    const newOrdine = await singoloPiatto.save();
+    res.status(201).json(newOrdine);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 //rotta per aggiornare un ordine
 router.patch("/:id", async (req, res) => {
   try {

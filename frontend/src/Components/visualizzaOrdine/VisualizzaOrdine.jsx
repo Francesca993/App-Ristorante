@@ -17,9 +17,8 @@ export default function VisualizzaOrdine() {
   useEffect(() => {
     const fetchOrdine = async () => {
       try {
-        const response = await getOrdine();
+        const response = await getOrdine(); // Recupera solo gli ordini dell'utente loggato
         setOrdine(response.data);
-        // Calcolo del totale
         const sommaTotale = response.data.reduce(
           (acc, piatto) =>
             acc + parseFloat(piatto.prezzo) * parseFloat(piatto.valore),
@@ -27,11 +26,12 @@ export default function VisualizzaOrdine() {
         );
         setTotale(sommaTotale);
       } catch (err) {
-        console.error("Errore nella visualizzazione dell'ordine");
+        console.error("Errore nella visualizzazione dell'ordine", err);
       }
     };
     fetchOrdine();
   }, []);
+
   const handleDelete = async (id) => {
     try {
       await deleteOrdine(id);
@@ -48,7 +48,7 @@ export default function VisualizzaOrdine() {
       );
       setTotale(nuovoTotale);
 
-      navigate("/riepilogoordine");
+      window.location.reload();
     } catch (error) {
       console.error("Errore durante l'eliminazione dell'elemento:", error);
     }

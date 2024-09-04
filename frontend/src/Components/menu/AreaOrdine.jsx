@@ -4,8 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import React, { useState, useEffect } from "react";
-import { createOrdine } from "../../Services/api";
-import { useNavigate } from "react-router-dom";
+import { createOrdine, getUserData } from "../../Services/api";
 
 export default function AreaOrdine({
   pnome,
@@ -13,24 +12,44 @@ export default function AreaOrdine({
   pdescrizione,
   pprezzo,
 }) {
-  const navigate = useNavigate();
+  const [userId, setUserId] = useState(null); // Stato per memorizzare l'ID utente
   const [ordine, setOrdine] = useState({
     nome: pnome,
     foto: pimmagine,
     descrizione: pdescrizione,
     prezzo: pprezzo,
     valore: "",
+    userId: "", // Aggiungi userId all'oggetto ordine
+    author: "",
+    email: "",
   });
-  // Utilizza useEffect per aggiornare l'ordine quando cambiano le props
+
+  // Recupera i dati dell'utente loggato
   useEffect(() => {
-    setOrdine({
+    const fetchUserData = async () => {
+      try {
+        const userData = await getUserData(); // Ottiene i dati dell'utente loggato
+        setUserId(userData._id); // Memorizza l'ID utente
+      } catch (err) {
+        console.error("Errore nel recupero dei dati utente", err);
+      }
+    };
+    fetchUserData();
+  }, []);
+
+  // Utilizza useEffect per aggiornare l'ordine quando cambiano le props o l'userId
+  useEffect(() => {
+    setOrdine((prevOrdine) => ({
+      ...prevOrdine,
       nome: pnome,
       foto: pimmagine,
       descrizione: pdescrizione,
       prezzo: pprezzo,
-      valore: "",
-    });
-  }, [pnome, pimmagine, pdescrizione, pprezzo]);
+      userId: userId, // Aggiorna userId
+      author: "",
+      email: "",
+    }));
+  }, [pnome, pimmagine, pdescrizione, pprezzo, userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,10 +66,13 @@ export default function AreaOrdine({
         valore: "",
         descrizione: "",
         prezzo: "",
+        userId: userId, // Mantieni userId
+        author: "",
+        email: "",
       });
       window.location.reload();
     } catch (err) {
-      console.error("errore nell'inserimento dell'ordine", err);
+      console.error("Errore nell'inserimento dell'ordine", err);
     }
   };
 
@@ -68,11 +90,7 @@ export default function AreaOrdine({
           </Button>
         </Col>
         <Col>
-          <Form.Select
-            type="text" // Corretto: utilizza lo stato corretto
-            onChange={handleChange}
-            name="valore"
-          >
+          <Form.Select type="text" onChange={handleChange} name="valore">
             <option>Quantità</option>
             <option value="1">1</option>
             <option value="2">2</option>

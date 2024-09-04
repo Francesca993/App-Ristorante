@@ -21,7 +21,11 @@ const listaOrdineSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true, // Campo obbligatorio per associare l'ordine all'utente
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Author",
+      required: true,
     },
   },
   { collection: "ordine" }
