@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:4505/auth/google/callback",
+      callbackURL: ` ${FRONTEND_URL}/auth/google/callback `,
     },
     // Questa funzione viene chiamata quando l'autenticazione Google ha successo
     async (accessToken, refreshToken, profile, done) => {
@@ -46,74 +46,7 @@ passport.use(
     }
   )
 );
-/*
-// NEW! Strategia di autenticazione di GitHub
-// Configuriamo Passport per utilizzare la strategia di autenticazione GitHub
-passport.use(
-  new GitHubStrategy(
-    {
-      // Usiamo le variabili d'ambiente per le credenziali OAuth di GitHub
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      // URL a cui GitHub reindirizzerà dopo l'autenticazione
-      callbackURL: `${process.env.BACKEND_URL}/api/auth/github/callback`,
-    },
-    // Funzione di verifica chiamata dopo che GitHub ha autenticato l'utente
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        // Cerchiamo se esiste già un autore con questo ID GitHub nel nostro database
-        let author = await Author.findOne({ githubId: profile.id });
 
-        // Se l'autore non esiste, ne creiamo uno nuovo
-        if (!author) {
-          // Estraiamo nome e cognome dal displayName o username di GitHub
-          // Se il nome è composto, consideriamo la prima parte come nome e il resto come cognome
-          const [nome, ...cognomeParts] = (
-            profile.displayName ||
-            profile.username ||
-            ""
-          ).split(" ");
-          const cognome = cognomeParts.join(" ");
-
-          // Gestione dell'email
-          let email;
-          if (profile.emails && profile.emails.length > 0) {
-            // Cerchiamo prima l'email primaria o verificata
-            email = profile.emails.find((e) => e.primary || e.verified)?.value;
-            // Se non troviamo un'email primaria o verificata, prendiamo la prima disponibile
-            if (!email) email = profile.emails[0].value;
-          }
-
-          // Se ancora non abbiamo un'email, usiamo un'email di fallback
-          if (!email) {
-            email = `${profile.id}@github.example.com`;
-            console.warn(
-              `Email non disponibile per l'utente GitHub ${profile.id}. Usando email di fallback.`
-            );
-          }
-
-          // Creiamo un nuovo autore con i dati ottenuti da GitHub
-          author = new Author({
-            githubId: profile.id,
-            nome: nome || "GitHub User", // Se non abbiamo un nome, usiamo 'GitHub User' come fallback
-            cognome: cognome,
-            email: email,
-          });
-          // Salviamo il nuovo autore nel database
-          await author.save();
-        }
-
-        // Chiamiamo done con l'autore trovato o appena creato
-        // Il primo argomento null indica che non ci sono errori
-        done(null, author);
-      } catch (error) {
-        // Se si verifica un errore durante il processo, lo passiamo a Passport
-        done(error, null);
-      }
-    }
-  )
-);
-*/
 // Serializzazione dell'utente per la sessione
 // Questa funzione determina quali dati dell'utente devono essere memorizzati nella sessione
 passport.serializeUser((user, done) => {
