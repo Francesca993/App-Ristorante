@@ -8,6 +8,8 @@ import authorRoutes from "./routes/authorRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import prenotazioniRoutes from "./routes/prenotazioniRoutes.js";
 import cors from "cors";
+import session from "express-session";
+import passport from "./config/passportConfig.js";
 
 // importo i middleware
 import {
@@ -22,6 +24,20 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Configurazione della sessione
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+// Inizializzazione di Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("mongodb connesso"))
