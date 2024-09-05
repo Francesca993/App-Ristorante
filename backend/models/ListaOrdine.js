@@ -19,9 +19,6 @@ const listaOrdineSchema = new mongoose.Schema(
     prezzo: {
       type: String,
     },
-    email: {
-      type: String,
-    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Author",

@@ -44,8 +44,10 @@ export const createPost = (postData) => api.post("/posts/", postData);
 export const updatePost = (postData, id) => api.put(`/posts/${id}`, postData);
 export const deletePost = (id) => api.delete(`/posts/${id}`);
 //rotte per prendere l'ordine
-export const getOrdine = () =>
-  api.get("/ordine", { headers: { Authorization: `Bearer ${token}` } });
+export const getOrdine = () => {
+  const token = localStorage.getItem("token");
+  return api.get("/ordine", { headers: { Authorization: `Bearer ${token}` } });
+};
 export const getPiatto = () => api.get(`/ordine/${id}`);
 export const createOrdine = (ordineData) => api.post("/ordine/", ordineData);
 export const updateOrdine = (ordineData, id) =>

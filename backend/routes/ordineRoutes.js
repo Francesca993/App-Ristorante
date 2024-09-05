@@ -3,24 +3,14 @@ import ListaOrdine from "../models/ListaOrdine.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
-//router.use(authMiddleware); per consentire solo a chi è autenticato di fare ordini
-/*
-//Ottenere la lista di tutti gli ordini
-router.get("/", async (req, res) => {
-  try {
-    const OrdineTotale = await ListaOrdine.find({});
-    res.json(OrdineTotale);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-*/
 
 //ROTTA PER OTTENERE GLI ORDINE PER IL LOGIN
 router.get("/", authMiddleware, async (req, res) => {
   try {
     // Filtra gli ordini per l'utente loggato
-    const OrdineTotale = await ListaOrdine.find({ author: req.author._id });
+    const OrdineTotale = await ListaOrdine.find({
+      author: req.author._id,
+    }).populate("author");
     res.json(OrdineTotale);
   } catch (err) {
     res.status(500).json({ message: err.message });

@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `http://localhost:5173/auth/google/callback`,
+      callbackURL: `/api/auth/google/callback`,
     },
     // Questa funzione viene chiamata quando l'autenticazione Google ha successo
     async (accessToken, refreshToken, profile, done) => {
