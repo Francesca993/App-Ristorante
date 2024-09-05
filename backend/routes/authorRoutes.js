@@ -39,10 +39,6 @@ router.post("/", async (req, res) => {
   try {
     // Crea una nuova istanza di Author con i dati dalla richiesta
     const author = new Author(req.body);
-
-    // La password verrà automaticamente hashata grazie al middleware pre-save
-    // che abbiamo aggiunto nello schema Author
-
     // Salva il nuovo user nel database
     const newAuthor = await author.save();
 

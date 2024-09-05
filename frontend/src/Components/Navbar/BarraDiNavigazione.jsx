@@ -17,6 +17,13 @@ export default function BarraDiNavigazione() {
       setIsLoggedIn(!!token);
     };
 
+    // Se c'è un token, controlla il ruolo
+    /* if (token) {
+        const storedRuolo = localStorage.getItem("ruolo");
+        setRuolo(storedRuolo);
+      }
+  };*/
+
     // Controlla lo stato di login all'avvio
     checkLoginStatus();
 
@@ -46,58 +53,45 @@ export default function BarraDiNavigazione() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link>
-            <Link className="nav-link" to="/">
-              {" "}
-              Home
-            </Link>
+          <Nav.Link as={Link} to="/" className="nav-link">
+            Home
           </Nav.Link>
-          <Nav.Link>
-            <Link className="nav-link" to="/commentiErecensioni">
-              {" "}
-              Recensioni&Commenti
-            </Link>
+          <Nav.Link as={Link} to="/commentiErecensioni" className="nav-link">
+            Recensioni&Commenti
           </Nav.Link>
-          <Nav.Link>
-            <Link className="nav-link" to="/prenota">
-              Prenota
-            </Link>
+          <Nav.Link as={Link} to="/prenota" className="nav-link">
+            Prenota
           </Nav.Link>
-          <Nav.Link>
-            <Link className="nav-link" to="/menu">
-              Menù
-            </Link>
+          <Nav.Link as={Link} to="/menu" className="nav-link">
+            Menù
           </Nav.Link>
           {isLoggedIn ? (
             <>
-              <Nav.Link>
-                <Link className="nav-link" to="/" onClick={handleLogout}>
-                  Log Out
-                </Link>
+              <Nav.Link
+                as={Link}
+                to="/"
+                className="nav-link"
+                onClick={handleLogout}
+              >
+                Log Out
               </Nav.Link>
-              <Nav.Link>
-                <Link className="nav-link" to="/riepilogoordine">
-                  Vai al tuo ordine
-                </Link>
+              <Nav.Link as={Link} to="/riepilogoordine" className="nav-link">
+                Vai al tuo ordine
               </Nav.Link>
             </>
           ) : (
             <>
               {" "}
-              <Nav.Link>
-                <Link className="nav-link" to="/login">
-                  Login
-                </Link>
+              <Nav.Link as={Link} to="/login" className="nav-link">
+                Login
               </Nav.Link>
-              <Nav.Link>
-                <Link className="nav-link" to="/register">
-                  Registrati
-                </Link>
+              <Nav.Link as={Link} to="/register" className="nav-link">
+                Registrati
               </Nav.Link>{" "}
             </>
           )}{" "}
         </Nav>
-        <Nav className="ms-auto m-4">
+        <Nav className="ms-auto m-4 nav-link">
           <Nav.Link href="https://www.facebook.com/francesca.montini2?locale=it_IT">
             <ion-icon name="logo-facebook"></ion-icon>
           </Nav.Link>

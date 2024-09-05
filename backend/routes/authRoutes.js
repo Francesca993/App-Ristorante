@@ -67,7 +67,7 @@ router.get(
       const token = await generateJWT({ id: req.user._id });
       // Reindirizza l'utente al frontend, passando il token come parametro URL
       // Il frontend può quindi salvare questo token e usarlo per le richieste autenticate
-      res.redirect(`{http://http://localhost:5173/login}/login?token=${token}`);
+      res.redirect(`{http://localhost:5173/login}/login?token=${token}`);
     } catch (error) {
       // Se c'è un errore nella generazione del token, lo logghiamo
       console.error("Errore nella generazione del token:", error);
