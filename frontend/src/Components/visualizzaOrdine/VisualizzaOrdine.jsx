@@ -5,7 +5,12 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useState } from "react";
-import { getOrdine, deleteOrdine } from "../../Services/api";
+import {
+  getOrdine,
+  deleteOrdine,
+  createOrderForAdmin,
+  getUserData,
+} from "../../Services/api";
 import { useNavigate } from "react-router-dom";
 import "./visualizzaOrdine.css";
 
@@ -54,6 +59,40 @@ export default function VisualizzaOrdine() {
     }
   };
 
+  const handleSendOrder = async () => {
+    try {
+      // Recupera i dati dell'utente, inclusa l'email
+      const userData = await getUserData();
+      const email = userData.email; // Assumi che l'email sia presente nei dati dell'utente
+
+      const orderData = {
+        ordini: ordine.map((piatto) => ({
+          titolo: piatto.nome, // Assumi che 'nome' sia il titolo del piatto
+          quantita: piatto.valore, // Assumi che 'valore' sia la quantità
+        })),
+        email: email, // Utilizza l'email recuperata dall'utente loggato
+      };
+
+      // Invia l'ordine all'amministratore
+      await createOrderForAdmin(orderData);
+
+      // Cancellare l'ordine dal backend dell'utente loggato
+      await Promise.all(
+        ordine.map(async (piatto) => await deleteOrdine(piatto._id))
+      );
+
+      // Resetta lo stato locale per svuotare il carrello
+      setOrdine([]);
+      setTotale(0);
+
+      // Messaggio di successo e reindirizzamento
+      alert("Ordine inviato con successo e carrello svuotato!");
+      navigate("/"); // Naviga verso la homepage o altra pagina desiderata
+    } catch (error) {
+      console.error("Errore durante l'invio dell'ordine:", error);
+      alert("Errore nell'invio dell'ordine. Per favore, riprova.");
+    }
+  };
   return (
     <div>
       <Container>
@@ -82,7 +121,7 @@ export default function VisualizzaOrdine() {
             <h2 className="text-end m-4">Totale Carrello: €{totale}</h2>
           </Col>
           <Col className="d-flex justify-content-end m-4">
-            <Button>Invia Ordine!</Button>{" "}
+            <Button onClick={handleSendOrder}>Invia Ordine!</Button>{" "}
           </Col>
         </Row>
       </Container>

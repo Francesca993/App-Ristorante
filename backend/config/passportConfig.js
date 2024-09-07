@@ -12,7 +12,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: `/api/auth/google/callback`,
+      callbackURL: "/api/auth/google/callback",
     },
     // Questa funzione viene chiamata quando l'autenticazione Google ha successo
     async (accessToken, refreshToken, profile, done) => {
@@ -40,6 +40,7 @@ passport.use(
         // Il primo argomento null indica che non ci sono errori
         done(null, author);
       } catch (error) {
+        console.error("Errore durante l'autenticazione con Google:", error);
         // Se si verifica un errore, lo passiamo a Passport
         done(error, null);
       }

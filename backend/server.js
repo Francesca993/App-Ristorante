@@ -7,6 +7,7 @@ import ordineRoutes from "./routes/ordineRoutes.js";
 import authorRoutes from "./routes/authorRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import prenotazioniRoutes from "./routes/prenotazioniRoutes.js";
+import visualizzaOrdiniRoutes from "./routes/visualizzaOrdiniRoutes.js";
 import cors from "cors";
 import session from "express-session";
 import passport from "./config/passportConfig.js";
@@ -47,6 +48,7 @@ app.use("/api/auth", authRoutes); // rotte per autenticaione
 app.use("/api/posts", blogPostRoutes);
 app.use("/api/authors", authorRoutes);
 app.use("/api/ordine", authMiddleware, ordineRoutes);
+app.use("/api/visualizzaordini", visualizzaOrdiniRoutes);
 app.use("/api/prenotazioni", prenotazioniRoutes);
 
 const PORT = process.env.PORT || 6001;

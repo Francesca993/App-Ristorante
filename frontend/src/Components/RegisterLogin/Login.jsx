@@ -59,7 +59,7 @@ export default function Login() {
 
   // Funzione aggiornata per gestire il login con Google
   const handleGoogleLogin = () => {
-    window.location.href = `http://localhost:5173//api/auth/google`;
+    window.location.href = `http://localhost:4505/api/auth/google`;
   };
 
   return (

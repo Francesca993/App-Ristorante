@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:4505/api/";
+const API_URL = "http://localhost:4505/api";
 const api = axios.create({ baseURL: API_URL });
 
 // Aggiungi un interceptor per includere il token in tutte le richieste
@@ -61,7 +61,28 @@ export const createPrenotazione = (formData) =>
 export const updatePrenotazione = (formData, id) =>
   api.put(`/prenotazioni/${id}`, formData);
 export const deletePrenotazione = (id) => api.delete(`/prenotazioni/${id}`);
+//ROTTE PER L'ADMIN PER RECUPERARE GLI ORDINI
+export const getOrderForAdmin = () => api.get("/visualizzaordini");
+export const createOrderForAdmin = async (orderData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:4505/api/visualizzaordini", // URL dell'API backend
+      orderData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
+    return response.data; // Restituisce la risposta del server
+  } catch (error) {
+    console.error("Errore durante l'invio dell'ordine:", error.response.data);
+    throw error; // Rilancia l'errore per gestirlo in modo adeguato
+  }
+};
+export const deleteOrderForAdmin = (id) =>
+  api.delete(`/visualizzaordini/${id}`);
 //ROTTE PER AUTENTICAZIONE
 //Funzione per registrare un nuovo utente
 export const registerUser = (userData) => api.post("/authors", userData);
