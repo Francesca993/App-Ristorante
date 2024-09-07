@@ -39,3 +39,9 @@
   font-weight: 500;
   font-size: 20px;
 }
+.vsStyle {
+  height: 30px;
+  text-align: center;
+  width: 30px;
+  padding: 5px;
+}

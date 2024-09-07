@@ -65,35 +65,10 @@ export default function VisualizzaRecensioni({ fetchPosts, posts }) {
               Avanti
             </Button>
           </Col>
-          <Col>
-            {" "}
-            <Form.Select aria-label="Default select example" className="m-3">
-              <option>Quantità di prodotti per pagina</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
-          </Col>
           <Col className="d-flex justify-content-end align-items-center">
-            <div
-              style={{
-                border: "1px solid black",
-                height: "30px",
-                padding: "2px",
-                margin: "8px",
-              }}
-            >
-              Pag:`${currentPage}`
-            </div>
-            <div
-              style={{
-                width: "20px",
-                border: "1px solid black",
-                height: "30px",
-                padding: "2px",
-              }}
-            >
-              <p>1</p>
+            <div className="vsStyle">Pag:</div>
+            <div className="vsStyle">
+              <p>{currentPage}</p>
             </div>
           </Col>{" "}
         </Row>

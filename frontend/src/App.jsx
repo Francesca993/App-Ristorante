@@ -11,7 +11,8 @@ import VisualizzaOrdine from "./Components/visualizzaOrdine/VisualizzaOrdine.jsx
 import Footer from "./Components/Footer/Footer.jsx";
 import Prenota from "./Components/PrenotaTavolo/Prenota.jsx";
 import DashboardAdmin from "./Components/DashboardAdmin/DashboardAdmin.jsx";
-import Button from "react-bootstrap/esm/Button.js";
+import OrdiniForAdmin from "./Components/DashboardAdmin/OrdiniForAdmin.jsx";
+import Prenotazioni from "./Components/DashboardAdmin/Prenotazioni.jsx";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/riepilogoordine" element={<VisualizzaOrdine />} />
         <Route path="/prenota" element={<Prenota />} />
         <Route path="/adminDashboard" element={<DashboardAdmin />} />
+        <Route path="/ordiniForAdmin" element={<OrdiniForAdmin />} />
+        <Route path="/PrenotazioniForAdmin" element={<Prenotazioni />} />
       </Routes>
       <Footer />
     </Router>

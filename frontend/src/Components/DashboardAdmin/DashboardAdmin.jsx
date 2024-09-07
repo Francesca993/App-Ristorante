@@ -1,75 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
-import { getOrderForAdmin, deleteOrderForAdmin } from "../../Services/api";
+import Col from "react-bootstrap/esm/Col";
+import "./dashboardAdmin.css";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
 
 export default function DashboardAdmin() {
-  const [ordini, setOrdini] = useState([]); // Stato per memorizzare gli ordini
-  const [error, setError] = useState(null); // Stato per gestire errori
+  const navigate = useNavigate(); // Inizializza useNavigate
 
-  useEffect(() => {
-    const fetchOrdini = async () => {
-      try {
-        const response = await getOrderForAdmin();
-        setOrdini(response.data); // Imposta gli ordini nello stato
-      } catch (err) {
-        setError("Errore nel recupero degli ordini.");
-        console.error("Errore nel recupero degli ordini:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchOrdini();
-  }, []);
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteOrderForAdmin(id);
-      // Filtra l'ordine cancellato dallo stato
-      setOrdini(ordini.filter((ordine) => ordine._id !== id));
-    } catch (err) {
-      setError("Errore nella cancellazione dell'ordine.");
-      console.error("Errore nella cancellazione dell'ordine:", err);
-    }
+  const handleCardClickOrder = () => {
+    navigate("/ordiniForAdmin"); // Reindirizza alla pagina degli ordini
   };
-
-  if (error) return <p>{error}</p>;
-
+  const handleCardClickBooking = () => {
+    navigate("/PrenotazioniForAdmin"); // Reindirizza alla pagina degli ordini
+  };
   return (
-    <Container>
+    <Container className="d-flex justify-content-center align-items-center">
       <Row>
-        {ordini.length > 0 ? (
-          ordini.map((ordine, index) => (
-            <Card key={index} className="mb-4">
-              <Card.Header>Ordine {index + 1}</Card.Header>
-              <Card.Body>
-                <Card.Title>Email: {ordine.email}</Card.Title>
-                <Card.Text>
-                  {ordine.ordini.map((piatto, idx) => (
-                    <div key={idx}>
-                      <strong>{piatto.titolo}</strong>: {piatto.quantita} units
-                    </div>
-                  ))}
-                </Card.Text>
-                <Button
-                  variant="danger"
-                  onClick={() => handleDelete(ordine._id)}
-                >
-                  Delete Order
-                </Button>
-              </Card.Body>
-            </Card>
-          ))
-        ) : (
-          <Card>
+        <Col
+          xs={12}
+          md
+          lg={6}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <Card
+            className="dashboardCommand m-3 p-4 text-center"
+            onClick={handleCardClickBooking}
+          >
+            <Card.Img
+              className="imgstyle"
+              variant="top"
+              src="./src/assets/icone/reception.png"
+            />
             <Card.Body>
-              <Card.Text>No orders available</Card.Text>
+              <Card.Title className="m-3">Prenotazioni</Card.Title>
             </Card.Body>
           </Card>
-        )}
+        </Col>
+        <Col
+          xs={12}
+          md
+          lg={6}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <Card
+            className="dashboardCommand m-3 p-4 text-center"
+            onClick={handleCardClickOrder}
+          >
+            <Card.Img
+              className="imgstyle"
+              variant="top"
+              src="./src/assets/icone/cooking.png"
+            />
+            <Card.Body>
+              <Card.Title className="m-3">Ordini</Card.Title>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
     </Container>
   );
