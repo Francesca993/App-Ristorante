@@ -3,13 +3,31 @@
 Benvenuti in **AppRistorante**! Questa è l'app pensata per il Capstone Project Epicode.
 Con **RistoranteApp**, puoi prenotare tavoli, sfogliare il menu, e molto altro ancora!
 
-## 🚀 Funzionalità
+---
 
-- 📅 **Prenotazione Tavoli**: Prenota il tuo tavolo preferito in pochi clic.
-- 🍝 **Sfoglia il Menu**: Scopri i nostri piatti deliziosi con descrizioni dettagliate.
-- 🕒 **Orari di Apertura**: Controlla gli orari di apertura del ristorante.
-- 🗺️ **Ordina da asporto**: Per ordinare direttamente dal menu.
-- ⭐ **Recensioni**: Leggi e lascia recensioni sui nostri piatti e servizi.
+## 🚀 Funzionalità per i Clienti
+
+- 📅 **Prenotazione Tavoli**: Prenota il tuo tavolo preferito in pochi clic. Scegli data e orario e assicurati il posto perfetto.
+- 🍝 **Sfoglia il Menu**: Scopri i nostri piatti deliziosi con descrizioni dettagliate, foto appetitose e ingredienti. Trova il tuo prossimo piatto preferito!
+- 🕒 **Orari di Apertura**: Controlla gli orari di apertura del ristorante per pianificare la tua visita.
+- 🗺️ **Ordina da Asporto**: Ordina i tuoi piatti preferiti direttamente dal menu e ritirali nel nostro punto vendita.
+- ⭐ **Recensioni**: Leggi le recensioni lasciate dagli altri clienti e condividi la tua esperienza. Il tuo feedback ci aiuta a migliorare!
+
+---
+
+## 🛠️ Funzionalità per gli Amministratori
+
+Gli **Amministratori** hanno accesso a un pannello di controllo speciale, dove possono:
+
+- 👤 **Gestire Prenotazioni**: Visualizza e gestisci tutte le prenotazioni effettuate dai clienti.
+- 📝 **Gestire Ordini**: Controlla gli ordini da asporto e aggiorna lo stato di preparazione e ritiro.
+
+---
+
+## 🔒 Accesso
+
+- **Clienti**: Sezione accessibile tramite registrazione e login. Dopo l’accesso, i clienti possono usufruire di tutte le funzionalità sopra descritte.
+- **Amministratori**: Sezione riservata ai gestori del ristorante per visualizzare prenotazioni e ordini in tempo reale. -**Autenticazione e Log-In con Google**
 
 ## 🛠️ Tecnologie Utilizzate
 
@@ -149,8 +167,17 @@ DELETE /api/posts/:id - Cancella singola recensione.
 ### Ordini
 
 POST /api/ordine - Crea un nuovo ordine.
-GET /api/ordine - Ottiene tutti glli ordini.
+GET /api/ordine - Ottiene tutti gli ordini.
 DELETE /api/ordine/:id - Cancella singolo ordine.
+POST /api/visualizzaordini - Ritorna gli ordini per l'Admin
+DELETE /api/visualizzaordini/:id - Cancella l'ordine per l'Admin
+GET /api/authors/:id/ordine- Ritorna l'ordine associato all'id dell'user che lpo ha effettuato
+
+### Utenti Registrati
+
+POST /api/authors - Crea un nuovo utente.
+GET /api/authors - Ottiene tutti gli utenti.
+DELETE /api/authors/:id - Cancella singolo utente.
 
 ## 📞 Contatti
 
