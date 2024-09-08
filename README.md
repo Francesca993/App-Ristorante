@@ -11,7 +11,7 @@ Con **RistoranteApp**, puoi prenotare tavoli, sfogliare il menu, e molto altro a
 - 🍝 **Sfoglia il Menu**: Scopri i nostri piatti deliziosi con descrizioni dettagliate, foto appetitose e ingredienti. Trova il tuo prossimo piatto preferito!
 - 🕒 **Orari di Apertura**: Controlla gli orari di apertura del ristorante per pianificare la tua visita.
 - 🗺️ **Ordina da Asporto**: Ordina i tuoi piatti preferiti direttamente dal menu e ritirali nel nostro punto vendita.
-- ⭐ **Recensioni**: Leggi le recensioni lasciate dagli altri clienti e condividi la tua esperienza. Il tuo feedback ci aiuta a migliorare!
+- ⭐ **Recensioni**: Leggi le recensioni lasciate dagli altri clienti e condividi la tua esperienza.
 
 ---
 
@@ -27,7 +27,8 @@ Gli **Amministratori** hanno accesso a un pannello di controllo speciale, dove p
 ## 🔒 Accesso
 
 - **Clienti**: Sezione accessibile tramite registrazione e login. Dopo l’accesso, i clienti possono usufruire di tutte le funzionalità sopra descritte.
-- **Amministratori**: Sezione riservata ai gestori del ristorante per visualizzare prenotazioni e ordini in tempo reale. -**Autenticazione e Log-In con Google**
+- **Amministratori**: Sezione riservata ai gestori del ristorante per visualizzare prenotazioni e ordini in tempo reale.
+- **Autenticazione e Log-In con Google**
 
 ## 🛠️ Tecnologie Utilizzate
 
@@ -59,6 +60,8 @@ app-ristorante/
 │
 ├── backend/
 │   │
+│   ├── config/
+│   │   └── passportConfig.js
 │   ├── middlewares/
 │   │   ├── authMiddleware.js
 │   │   ├── errorHandlers.js
@@ -68,6 +71,7 @@ app-ristorante/
 │   │   ├── Author.js
 │   │   └── BlogPost.js
 │   │   ├── ListaOrdine.js
+│   │   ├── VisualizzaOrdini.js
 │   │   └── Prenotazioni.js
 │   │
 │   ├── node_modules/
@@ -77,6 +81,7 @@ app-ristorante/
 │   │   ├── authRoutes.js
 │   │   └── blogPostRoutes.js
 │   │   ├── ordineRoutes.js
+│   │   ├── visualizzaOrdiniRoutes.js
 │   │   └── prenotazioniPostRoutes.js
 │   │
 │   ├── Services/
@@ -100,6 +105,11 @@ app-ristorante/
     │
     ├── src/
     │   ├── components/
+    │   │   ├── DashboardAdmin
+    │   │   │  ├── DashboardAdmin.css
+    │   │   │  ├── OrdiniForAdmin.jsx
+    │   │   │  ├── Prenotazioni.jsx
+    │   │   │  └──  DashboardAdmin.jsx
     │   │   ├── Footer
     │   │   │  ├── footer.css
     │   │   │  └──  Footer.jsx
