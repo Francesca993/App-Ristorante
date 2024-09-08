@@ -92,9 +92,15 @@ export default function Login() {
           <Button
             variant="outline-secondary"
             size="lg"
-            className="formStyleButton m-2"
+            className="formStyleButton m-2 d-flex align-items-center"
             onClick={handleGoogleLogin}
           >
+            {" "}
+            <img
+              src="./src/assets/icone/google.png" // Sostituisci con il percorso della tua icona di Google
+              alt="Google Icon"
+              className="logogoogle"
+            />
             Accedi con Google
           </Button>
         </form>

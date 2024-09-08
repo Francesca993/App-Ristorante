@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 import { getPrenotazioni, deletePrenotazione } from "../../Services/api";
 import "./dashboardAdmin.css";
 
@@ -44,27 +45,31 @@ export default function Prenotazioni() {
   if (loading) return <p>Caricamento in corso...</p>;
 
   return (
-    <Container className="containerStyle p-3">
+    <Container className=" p-3">
       <Row>
         {prenotazioni.length > 0 ? (
           prenotazioni.map((prenotazione, index) => (
-            <Card key={index} className="m-2 cardStyle">
-              <Card.Body>
-                <h4>Prenotazione {index + 1}</h4>
-                <h5>Email:</h5> <p>{prenotazione.email}</p>
-                <h5>Data:</h5> <p>{prenotazione.data}</p>
-                <h5>Ora:</h5> <p>{prenotazione.ora}</p>
-                <h5>Telefono:</h5> <p>{prenotazione.telefono}</p>
-                <Button
-                  variant="outline-danger"
-                  size="lg"
-                  className="buttonDelete m-2"
-                  onClick={() => handleDelete(prenotazione._id)}
-                >
-                  Cancella Prenotazione
-                </Button>
-              </Card.Body>
-            </Card>
+            <Col xs={12} md lg={6}>
+              <Card key={index} className="m-3 cardPrenotazioniStyle">
+                <Card.Body>
+                  <h4>
+                    Prenotazione {index + 1} per il giorno {prenotazione.data}
+                  </h4>
+                  <h5>Email:</h5> <p>{prenotazione.email}</p>
+                  <h5>Data:</h5> <p>{prenotazione.data} anno/mese/giorno</p>
+                  <h5>Ora:</h5> <p>{prenotazione.ora}</p>
+                  <h5>Telefono:</h5> <p>{prenotazione.telefono}</p>
+                  <Button
+                    variant="outline-danger"
+                    size="lg"
+                    className="buttonDelete m-2"
+                    onClick={() => handleDelete(prenotazione._id)}
+                  >
+                    Cancella Prenotazione
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
           ))
         ) : (
           <Card>
